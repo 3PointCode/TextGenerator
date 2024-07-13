@@ -1,7 +1,5 @@
 import random
 
-reader = open('data/orwell.txt')
-
 def successors_generator(reader):
     successor_map = {}
     context_window = []
@@ -21,13 +19,17 @@ def successors_generator(reader):
 
     return successor_map
 
-successor_map = successors_generator(reader)
-random.seed(2)
-word = input("Type anything (only one word will be used for context window): ")
-length = int(input("How long do you want your text to be: "))
+def generate_text(successor_map, word, length):
+    for i in range(length):
+        print(word, end=" ")
+        successors = successor_map[word]
+        next_word = random.choice(successors)
+        word = next_word
 
-for i in range(length):
-    print(word, end=" ")
-    successors = successor_map[word]
-    next_word = random.choice(successors)
-    word = next_word
+if __name__ == "__main__":
+    reader = open('data/orwell.txt')
+    random.seed(2)
+    successor_map = successors_generator(reader)
+    word = input("Type anything (only one word will be used for context window): ")
+    length = int(input("How long do you want your text to be: "))
+    generate_text(successor_map, word, length)
