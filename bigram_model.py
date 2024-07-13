@@ -18,4 +18,12 @@ for line in reader:
                 successor_map[key] = [value]
             context_window.pop(0)
 
-print(successor_map['and'])
+random.seed(2)
+word = input("Type anything (only one word will be used for context window): ")
+length = int(input("How long do you want your text to be: "))
+
+for i in range(length):
+    print(word, end=" ")
+    successors = successor_map[word]
+    next_word = random.choice(successors)
+    word = next_word
