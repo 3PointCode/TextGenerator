@@ -45,6 +45,6 @@ if __name__ == "__main__":
             generate_text(successor_map, word, length)
             break   # Exit code if input is valid.
         except ValueError as e:
-            print(f"Invalid input: {e}. Please try again.")
+            print(f"Invalid input: {e} Please try again.")
         except KeyError as e:
             print(f"Word '{word}' not found in the text. Please try another word.")
