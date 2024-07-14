@@ -30,6 +30,21 @@ if __name__ == "__main__":
     reader = open('data/orwell.txt')
     random.seed(2)
     successor_map = successors_generator(reader)
-    word = input("Type anything (only one word will be used for context window): ")
-    length = int(input("How long do you want your text to be: "))
-    generate_text(successor_map, word, length)
+
+    while True:
+        try:
+            words = input("Type anything (only one word will be used for context window): ")
+            if len(words.split()) > 1:
+                raise ValueError("Please enter only one word.")
+            word = words.strip('.,;-"'":?-'!()_{}[]").lower()
+
+            length = int(input("How long do you want your text to be: "))
+            if length <= 0:
+                raise ValueError("Length must be a positive integer!")
+
+            generate_text(successor_map, word, length)
+            break   # Exit code if input is valid.
+        except ValueError as e:
+            print(f"Invalid input: {e}. Please try again.")
+        except KeyError as e:
+            print(f"Word '{word}' not found in the text. Please try another word.")
