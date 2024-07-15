@@ -20,16 +20,16 @@ def successors_generator(reader):
     return successor_map
 
 def generate_text(successor_map, word, length):
-    for i in range(length):
+    for _ in range(length):
         print(word, end=" ")
         successors = successor_map[word]
         next_word = random.choice(successors)
         word = next_word
 
 if __name__ == "__main__":
-    reader = open('data/orwell.txt')
-    random.seed(2)
-    successor_map = successors_generator(reader)
+    with open('data/orwell.txt') as reader:
+        random.seed(2)
+        successor_map = successors_generator(reader)
 
     while True:
         try:
