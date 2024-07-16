@@ -14,3 +14,8 @@ class TestBigramTextGenerator(unittest.TestCase):
         }
         result_successor_map = successors_generator(reader)
         self.assertEqual(result_successor_map, expected_successor_map)
+
+    def test_generate_text_invalid_word(self):
+        successor_map = {'this': ['is'], 'is': ['wrong']}
+        with self.assertRaises(KeyError):
+            generate_text(successor_map, "invalid", 2)
