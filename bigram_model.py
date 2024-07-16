@@ -1,4 +1,6 @@
 import random
+import sys
+
 
 def successors_generator(reader):
     successor_map = {}
@@ -19,7 +21,7 @@ def successors_generator(reader):
 
     return successor_map
 
-def generate_text(successor_map, word, length):
+def generate_text(successor_map, word, length, file=sys.stdout):
     for _ in range(length):
         print(word, end=" ")
         successors = successor_map[word]
